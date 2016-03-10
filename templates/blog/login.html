@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login to blog</title>
+</head>
+<body>
+{% if form.has_errors %}
+    <p>Worng UserName or Password/p>
+{% endif %}
+
+{#<form action="{% url 'blog:member'%}" method="post">#}
+<form action="{% url "blog:login_user" %}" method="post">
+{% csrf_token %}
+    <input type="text" name="uname" placeholder="Enter user name" />
+    <input type="password" name="pwd" placeholder="Enter password" />
+    <input type="submit" value="login" />
+</form>
+</body>
+</html>

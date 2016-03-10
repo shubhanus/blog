@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Django default" uuid="0ba2b0f6-9a01-48d8-986a-4b546f37f4b7">
+      <user-name>shugar</user-name>
+      <user-password>df9adf9adf9adf9a</user-password>
+      <schema-pattern>blog.*</schema-pattern>
+      <default-schemas>blog.*</default-schemas>
+    </data-source>
+    <data-source name="Django default2" uuid="751154e3-52a7-4ad6-a104-456b8f5c2897">
+      <user-name>shugar</user-name>
+      <user-password>df9adf9adf9adf9a</user-password>
+      <schema-pattern>blog.*</schema-pattern>
+      <default-schemas>blog.*</default-schemas>
+    </data-source>
+  </component>
+</project>

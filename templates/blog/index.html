@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog's pot</title>
+    <style type="text/css">
+        body{
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="posts" style="margin-left: 20%">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if name %}
+    <p style="color: crimson;"> |{{ name }}| logged in<a href="{% url 'auth:logout' %}?next=/login" style="float: right; margin-right: 15%;">logout</a></p>
+    <hr style="margin-right: 10%;" />
+    {% if latest_posts %}
+        <div style="width: 90%;">
+        {% for p in latest_posts %}
+            <span class="title" style="font-weight: bold">{{ p.post_title }} : </span><span>{{ p.post_text }} </span><br />
+            <label name="post-date-time" for="p{{ forloop.counter }}" style="font-size: 10px; float: right;">( {{ p.post_date }} )</label><br /><br />
+            <div style="margin: 0px 0px 20px 40px; width: 70%;">
+                {% for comments in p.comments_set.all %}
+                        <div class="comment-box" style="margin-bottom: 25px; word-wrap: break-word">
+                            <label name="comment-user-name" for="new_comment-{{ forloop.counter }}" style="font-weight: bold">|{{ comments.user_name }}|: </label>
+                            {{ comments.comment }}
+                            <label name="comment-date-time" for="new_comment-{{ forloop.counter }}" style="font-size: 10px; float: right;">
+                                ( {{ comments.comment_date }} )
+                            </label>{% ifequal name|safe comments.user_name|safe %}<a href="{% url 'blog:del_comment' comments.id %}">del</a>{% endifequal %}
+                        </div>
+                {% endfor %}
+            <form method="post" action="{% url 'blog:post_comment' p.id %}">
+                {% csrf_token %}
+                <input name="uname" id="user-{{ forloop.counter }} type='text" size="10" readonly value="{{ name }}"><input name="cmnt" id="new_comment-{{ forloop.counter }}" type="text" style="width: 500px;">
+                <button type="submit">Post</button>
+                            <hr style="margin-right: 10%; margin-left: 10%;" />
+            </form>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p style="color: crimson"> no posts are available </p>
+    {% endif %}
+    {% else %}
+    <p style="color: crimson"> Please login see this page </p>
+{% endif %}
+</div>
+</body>
+</html>
